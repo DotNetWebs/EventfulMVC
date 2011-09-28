@@ -1,0 +1,133 @@
+﻿@using EventfulMVC.Models
+@using EventfulMVC.Infrastructure
+@model IEnumerable<Event>
+<div style="text-align: center">
+    <h1 style="font-size: 1.2em">
+        What's on in Horsham - Upcoming Horsham Events</h1>
+</div>
+<table>
+    <tr>
+        <th>
+            Venue
+        </th>
+        <th style="width: 150px">
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Time
+        </th>
+       @* <th>
+            Url
+        </th>*@
+    </tr>
+    @foreach (Event item in Model)
+    {
+        string date = item.StartTime.ToShortDateString();
+        string time = item.StartTime.ToShortTimeString();
+        string url = "";
+        
+        if (item.Venue.BranchImageURL != null)
+        {
+            url = MyHelpers.GetThumb("http://www.visithorsham.co.uk" + VirtualPathUtility.ToAbsolute(item.Venue.BranchImageURL));
+        }
+        
+        <tr>
+            <td>
+                @if (item.Venue.Affiliate)
+                {
+                    @Html.Image(url,"plok", item.Venue.BusinessName)
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Venue.Name)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.Raw(item.Description)
+            </td>
+            <td>
+                @Html.Raw(date)
+            </td>
+            <td>
+                @Html.Raw(time)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item, "Link")
+            </td>*@
+        </tr>
+    }
+</table>
+<script type="text/javascript">
+    $(function() {
+        $("#branchsearch").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                            url: "/home/autocompletebranches",
+                            type: "POST",
+                            dataType: "json",
+                            data: { searchText: request.term, maxResults: 10 },
+                            success: function(data) {
+                                response($.map(data, function(item) {
+                                    return { label: item.Label, value: item.Value, id: item.Label };
+                                }));
+                            }
+                        });
+                },
+                select: function(event, ui) {
+                    window.location.href = 'http://www.visithorsham.co.uk/Business/' + ui.item.value + ".aspx";
+                }
+            });
+
+    });
+    $(function() {
+        $("#brandsearch").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                            url: "/home/autocompletebrand",
+                            type: "POST",
+                            dataType: "json",
+                            data: { searchText: request.term, maxResults: 10 },
+                            success: function(data) {
+                                response($.map(data, function(item) {
+                                    return { label: item.Label, value: item.Value, id: item.Label };
+                                }));
+                            }
+                        });
+                },
+                select: function(event, ui) {
+                    window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Brand';
+                }
+            });
+
+    });
+    $(function() {
+        $("#productsearch").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                            url: "/home/autocompleteproduct",
+                            type: "POST",
+                            dataType: "json",
+                            data: { searchText: request.term, maxResults: 10 },
+                            success: function(data) {
+                                response($.map(data, function(item) {
+                                    return { label: item.Label, value: item.Value, id: item.Label };
+                                }));
+                            }
+                        });
+                },
+                select: function(event, ui) {
+                    window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Product';
+                }
+            });
+
+    });
+</script>

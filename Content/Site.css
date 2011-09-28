@@ -1,0 +1,261 @@
+body
+{
+    font-family: Arial, Sans-Serif;
+    color: #232323;
+    background-color: #454545;
+    padding: 0px;
+    margin: 0px;
+}
+
+table
+{
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-spacing: 0px;
+}
+
+th, td
+{
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+}
+
+#wrapper
+{
+    position: relative;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: White;
+    color: inherit;
+    overflow: auto;
+    z-index: 1;
+}
+
+#header
+{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 1000px;
+    height: 78px;
+    background-color: #990000;
+    color: inherit;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+#hleft
+{
+    position: absolute;
+    left: 0px;
+    width: 1000px;
+    height: 78px;
+    background-image: url(/Content/Support/vhlogo.jpg);
+}
+#logo
+{
+    position: absolute;
+    left: 0px;
+    width: 299px;
+}
+
+#hright
+{
+    position: absolute;
+    left: 658px;
+    width: 342px;
+    height: 78px;
+}
+
+#hbottom
+{
+    width: 1000px;
+    height: 5px;
+    background-image: url(Content\support\bannerThinBrown.jpg);
+    overflow: hidden;
+}
+
+#mainwrapper
+{
+    position: relative;
+    width: 100%;
+}
+
+#main
+{
+    font-size: .85em;
+    position: relative;
+    float: right;
+    top: 0px;
+    right: 20px;
+    width: 960px;
+    text-align: left;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+#hbottom
+{
+    width: 1000px;
+    height: 5px;
+    background-image: url(Support/bannerThinBrown.jpg);
+    overflow: hidden;
+}
+
+#search
+{
+    position: relative;
+    padding: 2px;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: .7em;
+    background-color: #990000;
+    color: White;
+    z-index: 600;
+}
+
+/*Begin Search Bar Control*/
+.searchwrapper
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    height: 50px;
+}
+
+.searchbox
+{
+    width: 33%;
+    float: left;
+    top: 5px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.searchtextbox
+{
+    width: 140px;
+    height: 12px;
+    font-size: .9em;
+}
+
+.btnSearch
+{
+    font-size: smaller;
+    margin-left: 2px;
+}
+/*End Search Bar Control */
+
+#footwrapper
+{
+    clear: both;
+}
+#foot
+{
+    font-size: 0.6em;
+    color: #454545;
+    background-color: inherit;
+    font-family: Verdana, Arial, Sans-Serif;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.footbox25, .footbox25left, .footbox25right
+{
+    width: 25%;
+    float: left;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.footbox25, .footboxcopy
+{
+    text-align: center;
+}
+.footbox25left
+{
+    text-align: left;
+}
+.footbox25right
+{
+    text-align: right;
+}
+
+/* Styles default in MVC
+-----------------------------------------------------------*/
+
+header, footer, nav, section
+{
+    display: block;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+fieldset
+{
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea
+{
+    min-height: 75px;
+}
+
+.editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field
+{
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}

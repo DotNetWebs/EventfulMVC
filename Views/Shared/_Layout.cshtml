@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div id="hleft">
+                <div id="logo">
+                </div>
+            </div>
+            @*<div id="hright">
+                <object width="342" height="78" title="flashintro" type="application/x-shockwave-flash"
+                    data="http://www.visithorsham.co.uk/Support/Flash/vhintro104.swf">
+                    <param name="movie" value="http://www.visithorsham.co.uk/Support/Flash/vhintro104.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="990000" />
+                    <param name="wmode" value="transparent" />
+                    <span>Flash Animation of Horsham Images</span>
+                </object>
+            </div>*@
+        </div>
+        <div id="search">
+            <div class="searchwrapper">
+                <fieldset>
+                    <legend>Search by:</legend>
+                    <div class="searchbox">
+                        <span class="searchtext">Business: </span>
+                        <input type="text" class="searchtextbox" id="branchsearch" />
+                        <input type="button" value="Go" class="btnSearch" />
+                    </div>
+                    <div class="searchbox">
+                        <span class="searchtext">Brand: </span>
+                        <input type="text" class="searchtextbox" id="brandsearch" />
+                        <input type="button" value="Go" class="btnSearch" />
+                    </div>
+                    <div class="searchbox">
+                        <span class="searchtext">Product/Service: </span>
+                        <input type="text" class="searchtextbox" id="productsearch" />
+                        <input type="button" value="Go" class="btnSearch" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+          <div id="hbottom">
+        </div>
+        <div id="mainwrapper">
+            <div id="main">
+                @RenderBody()
+            </div>
+        </div>
+        <div id="footwrapper">
+            <div id="foot">
+                <div>
+                    <br />
+                    <hr />
+                    <div class="footbox25left">
+                        @Html.Raw(DateTime.Now.ToLongDateString())
+                    </div>
+                    <div class="footbox25">
+                        <a href="http://validator.w3.org/check?uri=referer">
+                            <img  src="@Url.Content("~/Content/support/Icons/w3c.gif")" alt="Valid XHTML 1.0 Transitional" class="w3cIcon" /></a></div>
+                    <div class="footbox25">
+                        <a href="http://jigsaw.w3.org/css-validator/validator?uri=www.visithorsham.com">
+                            <img  src="@Url.Content("~/Content/support/Icons/w3ccss.gif")" alt="Valid CSS" class="w3cIcon" />
+                        </a>
+                    </div>
+                    <div class="footbox25right">
+                        <div class="footboxcopy">
+                            &copy; visithorsham.co.uk</div>
+                    </div>
+                    <br />
+                    <br />
+                    Powered By Town Centre Manager &copy; Dot Net Webs Ltd<br />
+                    Registered in England and Wales Registration Number 4107443
+                </div>
+                <div>
+                    <br />
+                    <a href="http://www.visithorsham.co.uk/privacy.aspx" class="blueLink">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
