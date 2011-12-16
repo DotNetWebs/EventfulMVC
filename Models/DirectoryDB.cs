@@ -17,6 +17,37 @@ namespace EventfulMVC.Models
             get { return WebConfigurationManager.ConnectionStrings["HTGConnectionString1"].ConnectionString; }
         }
 
+        public List<Models.VenueOwner> GetGetVenueOwners()
+        {
+            var con = new SqlConnection(Connection);
+            var cmd = new SqlCommand("EV_GetVenueOwners", con) { CommandType = CommandType.StoredProcedure };
+            var owners = new List<Models.VenueOwner>();
+
+            try
+            {
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var venueOwner = new VenueOwner((string)reader["EventfulID"], (string)reader["OwnerName"]);
+                    owners.Add(venueOwner);
+                }
+                reader.Close();
+
+                return owners;
+            }
+
+            catch (Exception)
+            {
+                throw new ApplicationException("Data Error");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+        
         public List<Brand> GetAutoCompleteBrand(string query)
         {
             var con = new SqlConnection(Connection);

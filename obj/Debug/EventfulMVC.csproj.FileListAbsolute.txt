@@ -21,9 +21,7 @@ C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\EntityFramework.
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.Helpers.dll
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.Mvc.dll
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.WebPages.dll
-C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\AntiXSSLibrary.xml
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\EntityFramework.xml
-C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\HtmlSanitizationLibrary.xml
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.Mvc.xml
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.WebPages.xml
 C:\Dot Net Webs Limited\EventfulMVC\EventfulMVC\EventfulMVC\bin\System.Web.Helpers.xml

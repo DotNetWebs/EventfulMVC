@@ -95,6 +95,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Sector.cs" />
     <Compile Include="Models\Venue.cs" />
+    <Compile Include="Models\VenueOwner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

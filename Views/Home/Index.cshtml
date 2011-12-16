@@ -10,7 +10,7 @@
         <th>
             Venue
         </th>
-        <th style="width: 150px">
+        <th style="width: 100px">
             Title
         </th>
         <th>
@@ -22,16 +22,24 @@
         <th>
             Time
         </th>
-       @* <th>
+        @* <th>
             Url
         </th>*@
     </tr>
     @foreach (Event item in Model)
     {
-        string date = item.StartTime.ToShortDateString();
+        string date = item.StartTime.ToString("ddd") + " " + item.StartTime.Day + "<br/>" + item.StartTime.ToString("MMM");
         string time = item.StartTime.ToShortTimeString();
+
+        string image = "";
+
+        if (item.Image != null)
+        {
+            image = "<img src='" + item.Image + "' alt='" + item.Title + " at " + item.Venue.Name + " Horsham' style='float: right;border-color: White; border-width: 5px; border-style: solid' />";
+        }
+
         string url = "";
-        
+
         if (item.Venue.BranchImageURL != null)
         {
             url = MyHelpers.GetThumb("http://www.visithorsham.co.uk" + VirtualPathUtility.ToAbsolute(item.Venue.BranchImageURL));
@@ -39,25 +47,19 @@
         
         <tr>
             <td>
-                @if (item.Venue.Affiliate)
-                {
-                    @Html.Image(url,"plok", item.Venue.BusinessName)
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.Venue.Name)
-                }
+                @(item.Venue.Affiliate ? Html.Image(url, "plok", item.Venue.BusinessName) : Html.DisplayFor(modelItem => item.Venue.Name))
             </td>
-            <td>
+            <td style="width: 100px">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
+                @Html.Raw(image)
                 @Html.Raw(item.Description)
             </td>
-            <td>
+            <td style="text-align: center; width: 50px">
                 @Html.Raw(date)
             </td>
-            <td>
+            <td style="text-align: center; width: 50px">
                 @Html.Raw(time)
             </td>
             @*<td>
@@ -67,67 +69,67 @@
     }
 </table>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $("#branchsearch").autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                            url: "/home/autocompletebranches",
-                            type: "POST",
-                            dataType: "json",
-                            data: { searchText: request.term, maxResults: 10 },
-                            success: function(data) {
-                                response($.map(data, function(item) {
-                                    return { label: item.Label, value: item.Value, id: item.Label };
-                                }));
-                            }
-                        });
-                },
-                select: function(event, ui) {
-                    window.location.href = 'http://www.visithorsham.co.uk/Business/' + ui.item.value + ".aspx";
-                }
-            });
+            source: function (request, response) {
+                $.ajax({
+                    url: "/home/autocompletebranches",
+                    type: "POST",
+                    dataType: "json",
+                    data: { searchText: request.term, maxResults: 10 },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Label, value: item.Value, id: item.Label };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                window.location.href = 'http://www.visithorsham.co.uk/Business/' + ui.item.value + ".aspx";
+            }
+        });
 
     });
-    $(function() {
+    $(function () {
         $("#brandsearch").autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                            url: "/home/autocompletebrand",
-                            type: "POST",
-                            dataType: "json",
-                            data: { searchText: request.term, maxResults: 10 },
-                            success: function(data) {
-                                response($.map(data, function(item) {
-                                    return { label: item.Label, value: item.Value, id: item.Label };
-                                }));
-                            }
-                        });
-                },
-                select: function(event, ui) {
-                    window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Brand';
-                }
-            });
+            source: function (request, response) {
+                $.ajax({
+                    url: "/home/autocompletebrand",
+                    type: "POST",
+                    dataType: "json",
+                    data: { searchText: request.term, maxResults: 10 },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Label, value: item.Value, id: item.Label };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Brand';
+            }
+        });
 
     });
-    $(function() {
+    $(function () {
         $("#productsearch").autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                            url: "/home/autocompleteproduct",
-                            type: "POST",
-                            dataType: "json",
-                            data: { searchText: request.term, maxResults: 10 },
-                            success: function(data) {
-                                response($.map(data, function(item) {
-                                    return { label: item.Label, value: item.Value, id: item.Label };
-                                }));
-                            }
-                        });
-                },
-                select: function(event, ui) {
-                    window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Product';
-                }
-            });
+            source: function (request, response) {
+                $.ajax({
+                    url: "/home/autocompleteproduct",
+                    type: "POST",
+                    dataType: "json",
+                    data: { searchText: request.term, maxResults: 10 },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Label, value: item.Value, id: item.Label };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                window.location.href = 'http://www.visithorsham.co.uk/SearchResults.aspx?SearchQuery=' + ui.item.label + '&SearchType=Product';
+            }
+        });
 
     });
 </script>
