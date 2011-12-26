@@ -1,25 +1,33 @@
 ﻿@using EventfulMVC.Models
 @using EventfulMVC.Infrastructure
 @model IEnumerable<Event>
+@functions {
+    private bool _first = true;
+}
 <div style="text-align: center">
     <h1 style="font-size: 1.2em">
         What's on in Horsham - Upcoming Horsham Events</h1>
 </div>
 <table>
     <tr>
-        <th>
+        <th style="color: white; background-color: #990000; font-weight: bold; text-align: center;
+            border-top-style: none; border-left-style: none">
             Venue
         </th>
-        <th style="width: 100px">
+        <th style="width: 100; color: white; background-color: #990000; font-weight: bold;
+            text-align: center; border-top-style: none">
             Title
         </th>
-        <th>
+        <th style="color: white; background-color: #990000; font-weight: bold; text-align: center;
+            border-top-style: none">
             Description
         </th>
-        <th>
+        <th style="color: white; background-color: #990000; font-weight: bold; text-align: center;
+            border-top-style: none">
             Date
         </th>
-        <th>
+        <th style="color: white; background-color: #990000; font-weight: bold; text-align: center;
+            border-top-style: none; border-right-style: none">
             Time
         </th>
         @* <th>
@@ -30,12 +38,18 @@
     {
         string date = item.StartTime.ToString("ddd") + " " + item.StartTime.Day + "<br/>" + item.StartTime.ToString("MMM");
         string time = item.StartTime.ToShortTimeString();
-
         string image = "";
+        string topborder = "";
+
+        if (_first)
+        {
+            topborder = " border-top-style: none ";
+            _first = false;
+        }
 
         if (item.Image != null)
         {
-            image = "<img src='" + item.Image + "' alt='" + item.Title + " at " + item.Venue.Name + " Horsham' style='float: right;border-color: White; border-width: 5px; border-style: solid' />";
+            image = "<img src='" + item.Image + "' alt='" + Html.DisplayFor(modelItem => item.Title) + " at " + Html.DisplayFor(modelItem => item.Venue.Name) + " Horsham' style='float: right;border-color: White; border-width: 5px; border-style: solid' />";
         }
 
         string url = "";
@@ -45,26 +59,33 @@
             url = MyHelpers.GetThumb("http://www.visithorsham.co.uk" + VirtualPathUtility.ToAbsolute(item.Venue.BranchImageURL));
         }
         
+        
         <tr>
-            <td>
-                @(item.Venue.Affiliate ? Html.Image(url, "plok", item.Venue.BusinessName) : Html.DisplayFor(modelItem => item.Venue.Name))
+            <td style="color: white; background-color: #990000; font-weight: bold; border-style: none;
+                text-align: center; border-bottom-width: 5px; @topborder ">
+                @Html.DisplayFor(modelItem => item.Venue.Name)
             </td>
-            <td style="width: 100px">
+            <td style="width: 100px; @topborder" rowspan="2">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
+            <td style="  @topborder" rowspan="2">
                 @Html.Raw(image)
                 @Html.Raw(item.Description)
             </td>
-            <td style="text-align: center; width: 50px">
+            <td style="text-align: center; width: 50px; @topborder" rowspan="2">
                 @Html.Raw(date)
             </td>
-            <td style="text-align: center; width: 50px">
+            <td style="text-align: center; width: 50px; @topborder" rowspan="2">
                 @Html.Raw(time)
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item, "Link")
             </td>*@
+        </tr>
+        <tr>
+            <td>
+                @(item.Venue.Affiliate ? Html.Image(url, "plok", item.Venue.BusinessName) : Html.DisplayFor(modelItem => item.Venue.Name))
+            </td>
         </tr>
     }
 </table>

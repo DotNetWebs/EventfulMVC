@@ -24,15 +24,12 @@ namespace EventfulMVC.Models
             {
                 var dDb = new DirectoryDb();
                 List<Venue> venues = dDb.GetAllVenues();
-
                 List<VenueOwner> owners = dDb.GetGetVenueOwners();
-
                 events = GetVenueEvents(venues, owners);
                 CacheHelper.Add(events, key);
             }
 
-            IEnumerable<Event> result = events.Where(s => s.StartTime > DateTime.Now).OrderBy(s => s.StartTime);
-
+            IEnumerable<Event> result = events.Where(s => s.StartTime.Date >= DateTime.Now.Date).OrderBy(s => s.StartTime);
             return result.ToList();
         }
 
@@ -74,7 +71,6 @@ namespace EventfulMVC.Models
                                         XElement eventStartTime = item.Element("start_time");
                                         XElement eventRecurString = item.Element("recur_string");
                                         XElement eventImage = null;
-                                        
                                         var element = item.Element("image");
 
                                         if (element != null)
@@ -87,13 +83,12 @@ namespace EventfulMVC.Models
                                         }
 
                                         var eventfulEvent = new Event();
-
                                         if (eventId != null) eventfulEvent.Title = eventId.Value;
                                         if (eventUrl != null) eventfulEvent.Url = eventUrl.Value;
                                         if (eventImage != null) eventfulEvent.Image = eventImage.Value;
                                         if (eventDescription != null)
                                             eventfulEvent.Description =
-                                                Sanitizer.GetSafeHtmlFragment(eventDescription.Value.Replace("\n","<br/>"));
+                                                Sanitizer.GetSafeHtmlFragment(eventDescription.Value.Replace("\n", "<br/>"));
                                         if (eventOwner != null) eventfulEvent.Owner = eventOwner.Value;
                                         if (eventStartTime != null)
                                             eventfulEvent.StartTime = DateTime.Parse(eventStartTime.Value);
@@ -103,7 +98,6 @@ namespace EventfulMVC.Models
                                         {
                                             eventfulEvent.RecurString = eventRecurString.Value;
                                             const string expression = @"(?<=daily until ).+";
-
                                             var rx = new Regex(expression);
 
                                             if (rx.IsMatch(eventfulEvent.RecurString))
@@ -124,7 +118,6 @@ namespace EventfulMVC.Models
                                             }
 
                                             const string expression2 = @"(?<=weekly on [a-z]+ until ).+";
-
                                             var rx2 = new Regex(expression2, RegexOptions.IgnoreCase);
 
                                             if (rx2.IsMatch(eventfulEvent.RecurString))
@@ -151,7 +144,6 @@ namespace EventfulMVC.Models
                         }
                     }
             }
-
             return events;
         }
     }
